@@ -43,7 +43,9 @@
       <td><%= u.nname %></td>
       <td><%= u.email %></td>
       <td><%= u.blockdaten %></td>
-      <td><%= f.check_box :attendances, {multiple: true}, u.id, nil %></td>
+      <td>
+        <%= f.check_box :attendances, {multiple: true}, u.id, nil %>
+      </td>
      </tr>
     <% end %>
   </table>

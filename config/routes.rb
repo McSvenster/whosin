@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :attendances
+
   resources :plans
   get 'plans/:id/calculate' => 'plans#calculate', as: :calculate
   get 'plans/:id/showraw' => 'plans#showraw', as: :showraw
