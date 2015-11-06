@@ -60,7 +60,9 @@ class PlansController < ApplicationController
   end
 
   def create
+    atts = plan_params.delete(:attendees)
     @plan = Plan.new(plan_params)
+    @plan.attendees = atts.join(",")
 
     respond_to do |format|
       if @plan.save
@@ -105,6 +107,6 @@ class PlansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plan_params
-      params.require(:plan).permit(:jahr, :start_datum, :end_datum, :wochentage, :attendees, :folge, :abgenommen)
+      params.require(:plan).permit(:jahr, :start_datum, :end_datum, :wochentage, {:attendees => []}, :folge, :abgenommen)
     end
 end

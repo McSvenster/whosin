@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :plans
   get 'plans/:id/calculate' => 'plans#calculate', as: :calculate
+  get 'plans/:id/showraw' => 'plans#showraw', as: :showraw
   put 'plans/:id/uebernehmen' => 'plans#uebernehmen', as: :uebernehmen
   put 'plans/:id/abschliessen' => 'plans#abschliessen', as: :abschliessen
 

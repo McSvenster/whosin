@@ -1,6 +1,5 @@
 class Plan < ActiveRecord::Base
   validates :start_datum, :end_datum, :presence => true
-  has_many :attendances
 
   def self.calculate()
     # Teilnehmerliste bilden

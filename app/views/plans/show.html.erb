@@ -11,7 +11,7 @@
 <h2>Plan für <%= @plan.jahr %></h2>
 <p>
   <strong>Teilnehmer(<%= @plan.attendees.size %>):</strong>
-  <% @plan.attendees.each do |a| %>
+  <% @plan.attendees.split(",").each do |a| %>
     <%= link_to "#{a.vname} #{a.nname.first}.", edit_plan_attendee_path(:aid => a.id), method: "put" %>
   <% end %>
 </p>
