@@ -16,6 +16,7 @@ class PlansController < ApplicationController
   # GET /plans/new
   def new
     @plan = Plan.new
+    @users = User.aktuell.order('nname')
     # some defaults - should be changed later on
     jahr = Time.now.year + 1
     @plan.start_datum = "#{jahr}-01-01"

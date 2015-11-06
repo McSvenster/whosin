@@ -7,6 +7,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <menu>
+    <ul>
+    <li><%= link_to "home", root_path %></li>
+    <li><%= link_to "users", users_path %></li>
+    <li><%= link_to "new plan", new_plan_path %></li>
+    </ul>
+  </menu>
+  <h2><%= "Hallo #{current_user().vname}" %></h2>
 
 <%= yield %>
 

@@ -2,13 +2,7 @@
   <% @plans.each do |plan| %>
     <%= link_to "#{plan.jahr}", plan %><br>
   <% end %>
-  <p>
-  <%= link_to 'Neuer Plan', new_plan_path %><br>
-  <%= link_to 'User', users_path %>
-  </p>
 </aside>
-
-<h2><%= "Hallo #{current_user().vname}" %></h2>
 
 <br>
 <% if @plan %>

@@ -26,8 +26,7 @@
     <% end %>
   </div>
 
-  <h3>Teilnehmerliste</h3>
-  <p>Ich will hier ne Liste aller aktiven User haben und mit einem Häkchen diejenigen ankreuzen können, die am Pikett teilnehmen werden.</p>
+  <h3>Teilnehmerliste <%= @plan.id %></h3>
   <table class="tn-liste" id="tn-liste">
     <tr>
       <th>Vorname</th>
@@ -37,7 +36,13 @@
       <th><%= f.submit (I18n.t :add_attendee) %></th>
       <!-- :id => @plan.id -->
     </tr>
-    <%= render "tn_liste", :f => f %>
+    <% @users.each do |u| %>
+    <tr>
+      <td><%= u.vname %></td>
+      <td><%= u.nname %></td>
+      <td><%= u.email %></td>
+     </tr>
+    <% end %>
   </table>
 
   <div class="actions">
