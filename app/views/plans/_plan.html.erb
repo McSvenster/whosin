@@ -1,0 +1,63 @@
+<div id="plan">
+  <% 
+    monate = [ "X", "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober"  , "November", "Dezember" ] 
+    wochentage = [ "X", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag" ]
+  %>
+
+  <% (@plan.start_datum.month..@plan.end_datum.month).each do |monat| %>  
+    <article class="monat">
+      <table>
+        <tr>
+          <td colspan="8" style="text-align: left; font-weight:bold; "><%= monate[monat] %></td>
+        </tr>
+        <tr class="kopf">
+          <th class="wn"><%= (@plan.wechsel == 1)? "KW" : "R" %></th>
+          <% c = 0 %>
+          <% 7.times do %>
+            <th><%= (@plan.wechsel + c) <= 7? wochentage[@plan.wechsel + c].slice(0..1) : wochentage[@plan.wechsel + c - 7].slice(0..1) %></th>
+            <% c = c+1 %>
+          <% end %>
+          <th></th>
+        </tr>
+        <% w = Date.new(@plan.jahr,monat).monday %>
+        <% while (w.month <= monat && w.year <= @plan.jahr) || (w.month == 12 && w.year < @plan.jahr) do %>
+          <% if w.cweek == Date.today.cweek && w.year == Date.today.year %>
+            <tr class="aktuell">
+          <% else %>
+            <tr>
+          <% end %>
+            <td class="wn"><%= w.cweek %></td>
+            <% (1..7).each do |wt| %>
+              <% if (w + (wt - 1)) == Date.today %>
+                <td class="heute">
+              <% else %>
+                <td>
+              <% end %>
+              <%= (w + (wt - 1)).strftime("%d") %>
+            </td>
+            <% end %>
+            <% if @plan.folge && !( monat == 12 && w.cweek == 1 ) && @plan.folge[w.cweek] == "nicht besetzt!"%>
+            <td class="nicht_besetzt">
+            <% else %>
+            <td>
+            <% end %>
+            <%= @plan.folge[w.cweek] + "." if @plan.folge && !( monat == 12 && w.cweek == 1 ) %></td>
+          </tr>
+          <% w = w+7 %>
+        <% end %>
+      </table>
+    </article>
+  <% end %>
+</div>
+<% if !current_page?(:plans) && @plan.auslastung && current_user().vname == "Admin" %>
+<article class="auslastung">
+<%= link_to "OK, so übernehmen", uebernehmen_path(@plan), method: "put", remote: true %>
+  <ul>
+  <% @plan.auslastung.each do |name,einsaetze| %>
+    <% unless name == "" %>
+      <li><%= "#{name}.: #{einsaetze}" %></li>
+    <% end %>
+  <% end %>
+  </ul>
+</article>
+<% end %>

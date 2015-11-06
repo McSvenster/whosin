@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  jahr: 1
+  start_datum: 2015-11-05
+  end_datum: 2015-11-05
+  wochentage: MyString
+  attendees: MyString
+  folge: MyString
+  abgenommen: false
+
+two:
+  jahr: 1
+  start_datum: 2015-11-05
+  end_datum: 2015-11-05
+  wochentage: MyString
+  attendees: MyString
+  folge: MyString
+  abgenommen: false

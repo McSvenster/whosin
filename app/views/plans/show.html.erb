@@ -1,0 +1,21 @@
+<aside class="fr">
+  <%= link_to 'raw anzeigen', showraw_path(:id => @plan.id) %><br>
+  <%= link_to 'Edit', edit_plan_path(@plan) %><br>
+  <%= link_to 'Back', plans_path %><br>
+  <% unless @plan.abgenommen %>
+  <p>
+    <%= link_to "neu berechnen", calculate_path(@plan), remote: true %>
+  </p>
+  <% end %>
+</aside>
+<h2>Plan für <%= @plan.jahr %></h2>
+<p>
+  <strong>Teilnehmer(<%= @plan.attendees.size %>):</strong>
+  <% @plan.attendees.each do |a| %>
+    <%= link_to "#{a.vname} #{a.nname.first}.", edit_plan_attendee_path(:aid => a.id), method: "put" %>
+  <% end %>
+</p>
+
+<hr>
+<br>
+<%= render "plan" %>
