@@ -5,7 +5,6 @@ class CreatePlans < ActiveRecord::Migration
       t.date :start_datum
       t.date :end_datum
       t.string :wochentage
-      t.string :attendees
       t.string :folge
       t.boolean :abgenommen
 

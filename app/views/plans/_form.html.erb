@@ -36,17 +36,17 @@
       <th><%= f.submit (I18n.t :add_attendee) %></th>
       <!-- :id => @plan.id -->
     </tr>
+    
     <% @users.each do |u| %>
     <tr>
       <td><%= u.vname %></td>
       <td><%= u.nname %></td>
       <td><%= u.email %></td>
       <td><%= u.blockdaten %></td>
-      <td><%= f.check_box :attendees, { :multiple => true }, u.id, nil %></td>
+      <td><%= f.check_box :attendances, {multiple: true}, u.id, nil %></td>
      </tr>
     <% end %>
   </table>
-
   <div class="actions">
     <%= f.submit %>
   </div>
