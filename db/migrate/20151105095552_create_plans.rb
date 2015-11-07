@@ -4,7 +4,8 @@ class CreatePlans < ActiveRecord::Migration
       t.integer :jahr
       t.date :start_datum
       t.date :end_datum
-      t.string :wochentage
+      t.string :wochentage, default: "1,2,3,4,5"
+      t.integer :wechsel, default: 1
       t.string :folge
       t.boolean :abgenommen
 

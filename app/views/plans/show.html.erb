@@ -10,9 +10,9 @@
 </aside>
 <h2>Plan für <%= @plan.jahr %></h2>
 <p>
-  <strong>Teilnehmer(<%= @plan.attendees.size %>):</strong>
-  <% @plan.attendees.split(",").each do |a| %>
-    <%= link_to "#{a.vname} #{a.nname.first}.", edit_plan_attendee_path(:aid => a.id), method: "put" %>
+  <strong>Teilnehmer(<%= @plan.attendances.size %>):</strong>
+  <% @plan.attendances.each do |a| %>
+    <%= link_to "#{a.user.vname} #{a.user.nname.first}.", edit_user_path(:user_id => a.id), method: "put" %>
   <% end %>
 </p>
 

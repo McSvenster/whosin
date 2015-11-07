@@ -17,10 +17,11 @@ class PlansController < ApplicationController
   def new
     @plan = Plan.new
     @users = User.aktuell.order('nname')
+    @attendees = [1,3]
     # some defaults - should be changed later on
-    jahr = Time.now.year + 1
-    @plan.start_datum = "#{jahr}-01-01"
-    @plan.end_datum = "#{jahr}-12-31"
+    @plan.jahr = Time.now.year + 1
+    @plan.start_datum = "#{@plan.jahr}-01-01"
+    @plan.end_datum = "#{@plan.jahr}-12-31"
     @plan.wochentage = "1,2,3,4,5,6"
   end
 

@@ -11,6 +11,12 @@
     </div>
   <% end %>
   <div class="field">
+    <%= f.label "Jahr" %><br>
+    <%= f.text_field :jahr %>
+  </div>
+  <% f.text_field :wochentage %>
+  <% f.text_field :wechsel %>
+  <div class="field">
     <%= f.label "Startdatum" %><br>
     <%= f.date_field :start_datum %>
   </div>
@@ -26,7 +32,7 @@
     <% end %>
   </div>
 
-  <h3>Teilnehmerliste <%= @plan.id %></h3>
+  <h3>Teilnehmerliste (<%= @plan.attendances.size %>)</h3>
   <table class="tn-liste" id="tn-liste">
     <tr>
       <th>Vorname</th>
@@ -37,14 +43,14 @@
       <!-- :id => @plan.id -->
     </tr>
     
-    <% @users.each do |u| %>
+    <% @plan.attendances.each do |a| %>
     <tr>
-      <td><%= u.vname %></td>
-      <td><%= u.nname %></td>
-      <td><%= u.email %></td>
-      <td><%= u.blockdaten %></td>
+      <td><%= a.user.vname %></td>
+      <td><%= a.user.nname %></td>
+      <td><%= a.user.email %></td>
+      <td><%= a.user.blockdaten %></td>
       <td>
-        <%= f.check_box :attendances, {multiple: true}, u.id, nil %>
+        <%= f.check_box :attendances, {multiple: true}, a.id, nil %>
       </td>
      </tr>
     <% end %>

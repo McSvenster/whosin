@@ -41,7 +41,7 @@
             <% else %>
             <td>
             <% end %>
-            <%= @plan.folge[w.cweek] + "." if @plan.folge && !( monat == 12 && w.cweek == 1 ) %></td>
+            <%= @plan.folge.split(",")[w.cweek] + "." if @plan.folge && !( monat == 12 && w.cweek == 1 ) %></td>
           </tr>
           <% w = w+7 %>
         <% end %>
@@ -49,15 +49,4 @@
     </article>
   <% end %>
 </div>
-<% if !current_page?(:plans) && @plan.auslastung && current_user().vname == "Admin" %>
-<article class="auslastung">
-<%= link_to "OK, so übernehmen", uebernehmen_path(@plan), method: "put", remote: true %>
-  <ul>
-  <% @plan.auslastung.each do |name,einsaetze| %>
-    <% unless name == "" %>
-      <li><%= "#{name}.: #{einsaetze}" %></li>
-    <% end %>
-  <% end %>
-  </ul>
-</article>
-<% end %>
+
