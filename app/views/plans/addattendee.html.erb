@@ -1,0 +1,6 @@
+<%= form_for @plan do |f| %>
+  <%= f.fields_for :attendances, [Attendance.new]*(@users.size) do |att| %>
+    <%= att.text_field :user_id %><br>
+  <% end %>
+  <%= f.submit %>
+<% end %>

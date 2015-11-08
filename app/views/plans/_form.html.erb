@@ -24,37 +24,7 @@
     <%= f.label "Enddatum" %><br>
     <%= f.date_field :end_datum %>
   </div>
-  
-  <div class="field">
-    <% f.label :wochentage %><br>
-    <% @plan.wochentage.split(",").each do |wt| %>
-      <% f.check_box :wochentage, { :multiple => true }, wt, nil %>
-    <% end %>
-  </div>
 
-  <h3>Teilnehmerliste (<%= @plan.attendances.size %>)</h3>
-  <table class="tn-liste" id="tn-liste">
-    <tr>
-      <th>Vorname</th>
-      <th>Nachname</th>
-      <th>eMail</th>
-      <th>Blockdaten</th>
-      <th><%= f.submit (I18n.t :add_attendee) %></th>
-      <!-- :id => @plan.id -->
-    </tr>
-    
-    <% @plan.attendances.each do |a| %>
-    <tr>
-      <td><%= a.user.vname %></td>
-      <td><%= a.user.nname %></td>
-      <td><%= a.user.email %></td>
-      <td><%= a.user.blockdaten %></td>
-      <td>
-        <%= f.check_box :attendances, {multiple: true}, a.id, nil %>
-      </td>
-     </tr>
-    <% end %>
-  </table>
   <div class="actions">
     <%= f.submit %>
   </div>

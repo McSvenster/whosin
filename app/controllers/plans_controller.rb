@@ -16,13 +16,16 @@ class PlansController < ApplicationController
   # GET /plans/new
   def new
     @plan = Plan.new
-    @users = User.aktuell.order('nname')
-    @attendees = [1,3]
     # some defaults - should be changed later on
     @plan.jahr = Time.now.year + 1
     @plan.start_datum = "#{@plan.jahr}-01-01"
     @plan.end_datum = "#{@plan.jahr}-12-31"
     @plan.wochentage = "1,2,3,4,5,6"
+  end
+
+  def addattendee
+    @plan = Plan.find(params[:id])
+    @users = User.aktuell.order('nname')
   end
 
   # GET /plans/1/edit
@@ -65,7 +68,7 @@ class PlansController < ApplicationController
 
     respond_to do |format|
       if @plan.save
-        format.html { redirect_to @plan, notice: 'Plan was successfully created.' }
+        format.html { redirect_to addattendee_path(id: @plan.id), notice: "Plan was successfully created. Now let's add some attendees." }
         format.json { render :show, status: :created, location: @plan }
       else
         format.html { render :new }
@@ -106,6 +109,6 @@ class PlansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plan_params
-      params.require(:plan).permit(:jahr, :start_datum, :end_datum, :wochentage, {:attendances_attributes => []}, :folge, :abgenommen)
+      params.require(:plan).permit(:jahr, :start_datum, :end_datum, :wochentage, {attendances_attributes: [:id, :plan_id, :user_id, :_destroy]}, :folge, :abgenommen)
     end
 end
