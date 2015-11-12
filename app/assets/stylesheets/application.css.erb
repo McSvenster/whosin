@@ -86,3 +86,35 @@ div {
     list-style: square;
   }
 }
+
+
+.ntn {
+  display: inline-block;
+  margin-bottom: -4px;
+  padding: 0px 4px;
+  width: 26px;
+  height: 16px;
+  background: url(<%= asset_path "2check.png" %>);
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 1px solid grey;
+}
+.ntn:hover {
+  transition: ease-in all 250ms;
+  width: 26px;
+  height: 16px;
+  background: url(<%= asset_path "check.png" %>);
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}
+
+.tn {
+  display: inline-block;
+  margin-bottom: -4px;
+  padding: 0px 4px;
+  width: 26px;
+  height: 16px;
+  background: url(<%= asset_path "check.png" %>);
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}

@@ -1,6 +1,11 @@
 <%= form_for @plan do |f| %>
-  <%= f.fields_for :attendances, [Attendance.new]*(@users.size) do |att| %>
-    <%= att.collection_select(:user_id, @users, :id, :vname, {prompt: "please select"}) %><br>
+  <% User.aktuell.order('nname').each do |user| %>
+    <% flag = @plan.attendances.any? { |attendance| attendance.user_id == user.id } %>
+    <%= user.vname + " " + user.nname.first + ". " %>
+    <%= check_box_tag "plan[attendances_attributes][][user_id]", user.id, flag %><br>
   <% end %>
+
+
+
   <%= f.submit %>
 <% end %>

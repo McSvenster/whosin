@@ -1,9 +1,9 @@
 class Plan < ActiveRecord::Base
   validates :start_datum, :end_datum, :presence => true
-  has_many :attendances
+  has_many :attendances,:dependent => :destroy
   has_many :users, through: :attendances
 
-  accepts_nested_attributes_for :attendances, reject_if: proc { |attributes| attributes['user_id'].blank? }
+  accepts_nested_attributes_for :attendances, reject_if: proc { |attributes| attributes['user_id'].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :users
 
   def calculate

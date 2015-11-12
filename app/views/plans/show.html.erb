@@ -1,6 +1,6 @@
 <aside class="fr">
   <%= link_to 'raw anzeigen', showraw_path(:id => @plan.id) %><br>
-  <%= link_to 'Edit', edit_plan_path(@plan) %><br>
+  <%= link_to 'add attendee', addattendee_path(@plan) %><br>
   <%= link_to 'Back', plans_path %><br>
   <% unless @plan.abgenommen %>
   <p>
@@ -9,12 +9,27 @@
   <% end %>
 </aside>
 <h2>Plan für <%= @plan.jahr %></h2>
-<p>
-  <strong>Teilnehmer(<%= @plan.attendances.size %>):</strong>
-  <% @plan.attendances.each do |a| %>
-    <%= link_to "#{a.user.vname} #{a.user.nname.first}.", edit_user_path(:user_id => a.id), method: "put" %>
+
+<% if @plan.abgenommen %>
+  <article>
+    <strong>Teilnehmer(<%= @plan.attendances.size %>):</strong>
+    <% @plan.attendances.each do |a| %>
+      <%= "#{a.user.vname} #{a.user.nname.first}." %>
+    <% end %>
+  </article>
+<% else %>
+  <article>
+    <strong>mögliche Teilnehmer(<%= User.aktuell.size %>):</strong>
+    <ul>
+    <% User.aktuell.order('nname').each do |user| %>
+    <% @plan.attendances.any? { |attendance| attendance.user_id == user.id } ? cl = "tn" : cl = "ntn" %>
+      <li><%= user.vname + " " + user.nname.first + ". " %>
+        <%= link_to "", addattendee_path(plan_id: @plan.id, user_id: user.id, todo: cl), class: cl %>
+      </li>
   <% end %>
-</p>
+  </ul>
+  </article>
+<% end %>
 
 <hr>
 <br>

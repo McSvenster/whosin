@@ -24,8 +24,13 @@ class PlansController < ApplicationController
   end
 
   def addattendee
-    @plan = Plan.find(params[:id])
-    @users = User.aktuell.order('nname')
+    @plan = Plan.find(params[:plan_id])
+    if params[:todo] == "tn"
+      @plan.attendances.where(user_id: params[:user_id]).first.destroy
+    else
+      @plan.attendances.create(user_id: params[:user_id])
+    end
+    redirect_to @plan
   end
 
   # GET /plans/1/edit
