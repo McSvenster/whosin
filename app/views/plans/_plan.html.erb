@@ -8,16 +8,16 @@
     <article class="monat">
       <table>
         <tr>
-          <td colspan="8" style="text-align: left; font-weight:bold; "><%= monate[monat] %></td>
+          <th colspan="9" style="text-align: left; font-weight:bold; "><%= monate[monat] %></th>
         </tr>
         <tr class="kopf">
-          <th class="wn"><%= (@plan.wechsel == 1)? "KW" : "R" %></th>
+          <td class="wn"><%= (@plan.wechsel == 1)? "KW" : "R" %></td>
           <% c = 0 %>
           <% 7.times do %>
-            <th><%= (@plan.wechsel + c) <= 7? wochentage[@plan.wechsel + c].slice(0..1) : wochentage[@plan.wechsel + c - 7].slice(0..1) %></th>
+            <td><%= (@plan.wechsel + c) <= 7? wochentage[@plan.wechsel + c].slice(0..1) : wochentage[@plan.wechsel + c - 7].slice(0..1) %></td>
             <% c = c+1 %>
           <% end %>
-          <th></th>
+          <td></td>
         </tr>
         <% w = Date.new(@plan.jahr,monat).monday %>
         <% while (w.month <= monat && w.year <= @plan.jahr) || (w.month == 12 && w.year < @plan.jahr) do %>
@@ -31,7 +31,7 @@
               <% if (w + (wt - 1)) == Date.today %>
                 <td class="heute">
               <% else %>
-                <td>
+                <td class="dom">
               <% end %>
               <%= (w + (wt - 1)).strftime("%d") %>
             </td>
@@ -41,7 +41,11 @@
             <% else %>
             <td>
             <% end %>
-            <%= @plan.folge.split(",")[w.cweek] + "." if @plan.folge && !( monat == 12 && w.cweek == 1 ) %></td>
+            <% if @plan.folge && !( monat == 12 && w.cweek == 1 ) %>
+              <% u = @plan.users.find(@plan.folge.split(",")[w.cweek]) %>
+              <%= u.vname + " " + u.nname.first + "." %>
+            <% end %>
+            </td>
           </tr>
           <% w = w+7 %>
         <% end %>
