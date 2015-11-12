@@ -42,8 +42,7 @@
             <td>
             <% end %>
             <% if @plan.folge && !( monat == 12 && w.cweek == 1 ) %>
-              <% u = @plan.users.find(@plan.folge.split(",")[w.cweek]) %>
-              <%= u.vname + " " + u.nname.first + "." %>
+              <%= @plan.folge.split(",")[w.cweek] %>
             <% end %>
             </td>
           </tr>

@@ -6,14 +6,13 @@ class Plan < ActiveRecord::Base
   accepts_nested_attributes_for :attendances, reject_if: proc { |attributes| attributes['user_id'].blank? }
   accepts_nested_attributes_for :users
 
-  def self.calculate()
+  def calculate
     # Teilnehmerliste bilden
     tn = {}
 
-    self.attendees.split(",").each do |a|
-      u = User.find(a)
+    self.users.each do |u|
       name = u.vname + " " + u.nname.first + "."
-      blockwochen = blockwochen_finden(u.blockdaten,self.jahr)  
+      u.blockdaten ? blockwochen = blockwochen_finden(u.blockdaten,self.jahr) : blockwochen = []
       tn[name] = blockwochen
     end
     
@@ -26,7 +25,7 @@ class Plan < ActiveRecord::Base
 #####
 ## Uebersetzung der eingegebenen Blockdaten in KWs
 #####
-  def self.blockwochen_finden(blockdaten,jahr)
+  def blockwochen_finden(blockdaten,jahr)
     blockdaten.gsub!(/,/, "\n")
     blockdaten.gsub!(/bis/, "-")
     blockdaten.gsub!(/ */, "")
@@ -79,7 +78,7 @@ class Plan < ActiveRecord::Base
 #####
 ## Prio nach Anzahl der bish. Einsaetze und Anzahl der geblockten Termine
 #####
-  def self.prio_bilden(tn,folge,ges_einsaetze,ger_schalter)
+  def prio_bilden(tn,folge,ges_einsaetze,ger_schalter)
     namen = []
     tln = {}
     einsaetze_pp = folge.each_with_object(Hash.new(0)) { |name,anzahl| anzahl[name] += 1}
@@ -104,7 +103,7 @@ class Plan < ActiveRecord::Base
 #####
 ## Berechnung der Folge unter Beruecksichtigg. der geblockten Termine
 #####
-  def self.folge_berechnen(tn,jahr)
+  def folge_berechnen(tn,jahr)
     folge = [ "" ]
     ges_einsaetze = "28.12.#{jahr}".to_date.cweek
     ger_schalter = 1

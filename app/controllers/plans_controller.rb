@@ -36,10 +36,10 @@ class PlansController < ApplicationController
   # POST /plans.json
 
   def calculate
-    folge, auslastung = Plan.calculate(params[:id])
     @plan = Plan.find(params[:id])
-    @plan.folge = folge
-    @plan.auslastung = auslastung
+    folge, auslastung = @plan.calculate
+    @plan.folge = folge.join(",")
+    @auslastung = auslastung
     respond_to do |format|
       format.js
     end
