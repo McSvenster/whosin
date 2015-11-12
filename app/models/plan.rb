@@ -3,7 +3,7 @@ class Plan < ActiveRecord::Base
   has_many :attendances
   has_many :users, through: :attendances
 
-  accepts_nested_attributes_for :attendances
+  accepts_nested_attributes_for :attendances, reject_if: proc { |attributes| attributes['user_id'].blank? }
   accepts_nested_attributes_for :users
 
   def self.calculate()
