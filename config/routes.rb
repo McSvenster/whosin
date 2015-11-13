@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   get 'plans/:id/addattendee' => 'plans#addattendee', as: :addattendee
   get 'plans/:id/calculate' => 'plans#calculate', as: :calculate
   get 'plans/:id/showraw' => 'plans#showraw', as: :showraw
-  put 'plans/:id/uebernehmen' => 'plans#uebernehmen', as: :uebernehmen
-  put 'plans/:id/abschliessen' => 'plans#abschliessen', as: :abschliessen
+  put 'plans/:id/suggest' => 'plans#suggest', as: :suggest
+  put 'plans/:id/close' => 'plans#close', as: :close
 
   resources :users
   

@@ -50,7 +50,8 @@
 </div>
 <% if !current_page?(:plans) && @auslastung %>
 <article class="auslastung">
-<%= link_to "OK, so übernehmen", uebernehmen_path(folge: @folge), method: "put" %>
+<%= link_to "so vorschlagen", suggest_path(folge: @folge), method: "put" %><br>
+<%= link_to "OK, so übernehmen", close_path, method: "put" %>
   <ul>
   <% @auslastung.each do |name,einsaetze| %>
     <% unless name == "" %>

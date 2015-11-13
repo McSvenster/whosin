@@ -11,7 +11,12 @@ class PlansController < ApplicationController
   # GET /plans/1
   # GET /plans/1.json
   def show
-    @folge = @plan.folge.split(",")
+    if @plan.folge 
+      @folge = @plan.folge.split(",")
+      @auslastung = attendeesload(@folge)
+    else
+      @folge = []
+    end
   end
 
   # GET /plans/new
@@ -50,20 +55,16 @@ class PlansController < ApplicationController
     end
   end
 
-  def uebernehmen
+  def suggest
     @plan = Plan.find(params[:id])
-    @plan.update(folge: params[:folge].join(","), abgenommen: true)
+    @plan.update(folge: params[:folge].join(","))
     redirect_to @plan
-    # respond_to do |format|
-    #   format.js
-    # end
   end
 
-  def abschliessen
-    @plan = Plan.calculate(params[:id])
-    respond_to do |format|
-      format.js
-    end
+  def close
+    @plan = Plan.find(params[:id])
+    @plan.update(abgenommen: true)
+    redirect_to @plan
   end
 
   def create
