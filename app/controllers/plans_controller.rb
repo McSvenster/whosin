@@ -22,6 +22,11 @@ class PlansController < ApplicationController
     @auslastung = attendeesload(@folge)
   end
 
+  def plan4dinkum
+    @plan = Plan.find(params[:plan_id])
+    @folge = @plan.folge.split(",")
+  end
+
   # GET /plans/new
   def new
     @plan = Plan.new

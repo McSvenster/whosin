@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :plans
   get 'plans/:id/addattendee' => 'plans#addattendee', as: :addattendee
   get 'plans/:id/calculate' => 'plans#calculate', as: :calculate
-  get 'plans/:id/showraw' => 'plans#showraw', as: :showraw
+  get 'plans/:id/plan4dinkum' => 'plans#plan4dinkum', as: :plan4dinkum
   put 'plans/:id/suggest' => 'plans#suggest', as: :suggest
   put 'plans/:id/close' => 'plans#close', as: :close
 

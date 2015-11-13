@@ -12,7 +12,8 @@
     <menu>
       <%= link_to "neu berechnen", calculate_path(@plan), remote: true %><br>
       <%= link_to "so vorschlagen", suggest_path(folge: @folge), method: "put" %><br>
-      <%= link_to "OK, so übernehmen", close_path, method: "put" %>
+      <%= link_to "OK, so übernehmen", close_path, method: "put" %><br>
+      <%= link_to "Plan für Dinkum anzeigen", plan4dinkum_path(plan_id: @plan.id) %>
     </menu>
   </article> 
 <ul class="attendees">
