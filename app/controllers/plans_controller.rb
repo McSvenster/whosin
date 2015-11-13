@@ -1,5 +1,5 @@
 class PlansController < ApplicationController
-  before_action :set_plan, only: [:show, :edit, :update, :destroy]
+  before_action :set_plan, only: [:show, :edit, :calculate, :suggest, :close, :plan4dinkum, :addattendee, :update, :destroy]
 
   # GET /plans
   # GET /plans.json
@@ -23,7 +23,6 @@ class PlansController < ApplicationController
   end
 
   def plan4dinkum
-    @plan = Plan.find(params[:plan_id])
     @folge = @plan.folge.split(",")
   end
 
@@ -38,7 +37,6 @@ class PlansController < ApplicationController
   end
 
   def addattendee
-    @plan = Plan.find(params[:plan_id])
     if params[:todo] == "tn"
       @plan.attendances.where(user_id: params[:user_id]).first.destroy
     else
@@ -55,7 +53,6 @@ class PlansController < ApplicationController
   # POST /plans.json
 
   def calculate
-    @plan = Plan.find(params[:id])
     @folge = @plan.calculate
     @auslastung = attendeesload(@folge)
     respond_to do |format|
@@ -64,13 +61,11 @@ class PlansController < ApplicationController
   end
 
   def suggest
-    @plan = Plan.find(params[:id])
     @plan.update(folge: params[:folge].join(","))
     redirect_to @plan
   end
 
   def close
-    @plan = Plan.find(params[:id])
     @plan.update(abgenommen: true)
     redirect_to @plan
   end

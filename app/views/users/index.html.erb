@@ -1,32 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Users</h1>
+<h1>Mögliche Teilnehmer</h1>
 
 <table>
-  <thead>
-    <tr>
-      <th>Vorname</th>
-      <th>Nachname</th>
-      <th>Email</th>
-      <th>Blockdaten</th>
-      <th>Admin</th>
-      <th>Geloescht</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.vname %></td>
-        <td><%= user.nname %></td>
-        <td><%= user.email %></td>
+        <td><%= link_to "#{user.vname} #{user.nname}", edit_user_path(user) %><br>
+        &nbsp;<%= user.email %></td>
         <td><%= user.blockdaten %></td>
-        <td><%= user.admin %></td>
-        <td><%= user.geloescht %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

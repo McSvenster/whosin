@@ -11,9 +11,9 @@
     <strong>mögliche Teilnehmer (<%= User.aktuell.size %>)</strong>
     <menu>
       <%= link_to "neu berechnen", calculate_path(@plan), remote: true %><br>
-      <%= link_to "so vorschlagen", suggest_path(folge: @folge), method: "put" %><br>
-      <%= link_to "OK, so übernehmen", close_path, method: "put" %><br>
-      <%= link_to "Plan für Dinkum anzeigen", plan4dinkum_path(plan_id: @plan.id) %>
+      <%= link_to "so vorschlagen", suggest_path(folge: @folge, id: @plan.id), method: "put" %><br>
+      <%= link_to "OK, so übernehmen", close_path(id: @plan.id), method: "put" %><br>
+      <%= link_to "Plan für Dinkum anzeigen", plan4dinkum_path(id: @plan.id) %>
     </menu>
   </article> 
 <ul class="attendees">
@@ -30,7 +30,7 @@
         <table class="attendee">
           <tr>
             <td class="name"><%= uname %></td>
-            <td class="checkbox"><%= link_to link, addattendee_path(plan_id: @plan.id, user_id: user.id, todo: cl), class: cl %></td>
+            <td class="checkbox"><%= link_to link, addattendee_path(id: @plan.id, user_id: user.id, todo: cl), class: cl %></td>
           </tr>
         </table>
       </li>

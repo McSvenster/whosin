@@ -17,7 +17,6 @@ class Plan < ActiveRecord::Base
     end
     
     folge = folge_berechnen(tn,self.jahr)
-    # auslastung = folge.each_with_object(Hash.new(0)) { |name,anzahl| anzahl[name] += 1}
     return folge
   end
 
