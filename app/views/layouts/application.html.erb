@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<% unless current_page?("/sessions/new") %>
+<% unless current_page?(new_session_url) %>
   <menu class="main_menu">
     <%= "Hallo #{current_user().vname}"  %>
     <ul>

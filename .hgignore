@@ -8,6 +8,7 @@ syntax: glob
 config/database.yml
 config/secrets.yml
 tmp/
+vendor/bundle/
 
 syntax: regexp
 db\/(?!migrate).*
