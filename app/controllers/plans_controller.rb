@@ -6,6 +6,9 @@ class PlansController < ApplicationController
   def index
     @plans = Plan.all
     @plan = Plan.where(:jahr => Date.today.year).first
+    if @plan.folge 
+      @folge = @plan.folge.split(",")
+    end
   end
 
   # GET /plans/1
@@ -13,10 +16,10 @@ class PlansController < ApplicationController
   def show
     if @plan.folge 
       @folge = @plan.folge.split(",")
-      @auslastung = attendeesload(@folge)
     else
       @folge = []
     end
+    @auslastung = attendeesload(@folge)
   end
 
   # GET /plans/new

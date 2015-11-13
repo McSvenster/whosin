@@ -35,11 +35,6 @@ pre {
 
 a {
   color: #000;
-
-  &:visited {
-    color: #666;
-  }
-
   &:hover {
     color: #fff;
     background-color: #000;
@@ -95,13 +90,19 @@ div {
   list-style: none;
   overflow: auto;
   width: 90%;
+  li {
+    display: block;
+    float: left;
+  }
 }
 
-.attendees li {
-  width: 140px;
-  height: 18px;
-  display: block;
-  float: left;
+.attendee {
+  .name {
+    width: 88px;
+  }
+  .checkbox {
+    width: 44px;
+  }
 }
 
 .ntn {
@@ -114,30 +115,15 @@ div {
   background-repeat: no-repeat;
   background-position: center;
   border: 1px solid grey;
-}
-.ntn:hover {
-  transition: ease-in all 250ms;
-  width: 26px;
-  height: 16px;
-  background: url(<%= asset_path "check.png" %>);
-  background-repeat: no-repeat;
-  background-position: center bottom;
+  &:hover {
+    width: 26px;
+    height: 16px;
+    background: url(<%= asset_path "check.png" %>);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+  }
 }
 
 .tn {
-  display: inline-block;
-  margin-bottom: -4px;
-  padding: 0px 4px;
-  width: 26px;
-  height: 16px;
-  background: url(<%= asset_path "check.png" %>);
-  background-repeat: no-repeat;
-  background-position: center bottom;
-}
-
-.auslastung {
-  float: right;
-  height: 40px;
-  width: 140px;
-  margin-left: 24px;
+  text-decoration: none;
 }

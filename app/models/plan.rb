@@ -25,6 +25,7 @@ class Plan < ActiveRecord::Base
 #####
 ## Uebersetzung der eingegebenen Blockdaten in KWs
 #####
+
   def blockwochen_finden(blockdaten,jahr)
     blockdaten.gsub!(/,/, "\n")
     blockdaten.gsub!(/bis/, "-")
@@ -91,8 +92,6 @@ class Plan < ActiveRecord::Base
         tln[person] = tn[person].size * 20 + einsaetze_pp[person] * 100 / durchschnt_eins
       end
     end
-
-
     tln = Hash[tln.sort_by{ |n,bw| bw }.reverse]
     tln.keys.each do |n|
       namen << n
@@ -129,4 +128,5 @@ class Plan < ActiveRecord::Base
     end
     return folge 
   end
+
 end

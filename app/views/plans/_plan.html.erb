@@ -1,5 +1,43 @@
 <div id="plan">
-
+<% if @plan.abgenommen %>
+  <article>
+    <strong>Teilnehmer(<%= @plan.attendances.size %>):</strong>
+    <% @plan.attendances.each do |a| %>
+      <%= "#{a.user.vname} #{a.user.nname.first}." %>
+    <% end %>
+  </article>
+<% else %>
+  <article>
+    <strong>mögliche Teilnehmer (<%= User.aktuell.size %>)</strong>
+    <menu>
+      <%= link_to "neu berechnen", calculate_path(@plan), remote: true %><br>
+      <%= link_to "so vorschlagen", suggest_path(folge: @folge), method: "put" %><br>
+      <%= link_to "OK, so übernehmen", close_path, method: "put" %>
+    </menu>
+  </article> 
+<ul class="attendees">
+    <% User.aktuell.order('nname').each do |user| %>
+      <% uname =  user.vname + " " + user.nname.first + "." %>
+      <% if @plan.attendances.any? { |attendance| attendance.user_id == user.id } %>
+        <% cl = "tn" %>
+        <% link = "( #{@auslastung[uname]} )" %>
+      <% else %>
+        <% cl = "ntn" %>
+        <% link = "" %>
+      <% end %>
+      <li>
+        <table class="attendee">
+          <tr>
+            <td class="name"><%= uname %></td>
+            <td class="checkbox"><%= link_to link, addattendee_path(plan_id: @plan.id, user_id: user.id, todo: cl), class: cl %></td>
+          </tr>
+        </table>
+      </li>
+  <% end %>
+  </ul>
+<% end %>
+<hr>
+<br>
   <% (@plan.start_datum.month..@plan.end_datum.month).each do |monat| %>  
     <article class="monat">
       <table>
@@ -48,16 +86,3 @@
     </article>
   <% end %>
 </div>
-<% if !current_page?(:plans) && @auslastung %>
-<article class="auslastung">
-<%= link_to "so vorschlagen", suggest_path(folge: @folge), method: "put" %><br>
-<%= link_to "OK, so übernehmen", close_path, method: "put" %>
-  <ul>
-  <% @auslastung.each do |name,einsaetze| %>
-    <% unless name == "" %>
-      <li><%= "#{name}.: #{einsaetze}" %></li>
-    <% end %>
-  <% end %>
-  </ul>
-</article>
-<% end %>
