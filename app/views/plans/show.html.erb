@@ -1,13 +1,3 @@
-<aside class="fr">
-  <%= link_to 'raw anzeigen', showraw_path(:id => @plan.id) %><br>
-  <%= link_to 'add attendee', addattendee_path(@plan) %><br>
-  <%= link_to 'Back', plans_path %><br>
-  <% unless @plan.abgenommen %>
-  <p>
-    <%= link_to "neu berechnen", calculate_path(@plan), remote: true %>
-  </p>
-  <% end %>
-</aside>
 <h2>Plan für <%= @plan.jahr %></h2>
 
 <% if @plan.abgenommen %>
@@ -19,8 +9,8 @@
   </article>
 <% else %>
   <article>
-    <strong>mögliche Teilnehmer(<%= User.aktuell.size %>):</strong>
-    <ul>
+    <strong>mögliche Teilnehmer (<%= User.aktuell.size %>)</strong>
+    <ul class="attendees">
     <% User.aktuell.order('nname').each do |user| %>
     <% @plan.attendances.any? { |attendance| attendance.user_id == user.id } ? cl = "tn" : cl = "ntn" %>
       <li><%= user.vname + " " + user.nname.first + ". " %>
@@ -29,6 +19,10 @@
   <% end %>
   </ul>
   </article>
+  <p>
+    <%= link_to "neu berechnen", calculate_path(@plan), remote: true %>
+  </p>
+  
 <% end %>
 
 <hr>

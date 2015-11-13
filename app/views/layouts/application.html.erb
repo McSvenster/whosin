@@ -8,14 +8,14 @@
 </head>
 <body>
 <% unless current_page?("/sessions/new") %>
-  <menu>
+  <menu class="main_menu">
+    <%= "Hallo #{current_user().vname}"  %>
     <ul>
-    <li><%= link_to "home", root_path %></li>
-    <li><%= link_to "users", users_path %></li>
-    <li><%= link_to "new plan", new_plan_path %></li>
+      <li><%= link_to "home", root_path %></li>
+      <li><%= link_to "users", users_path %></li>
+      <li><%= link_to "new plan", new_plan_path %></li>
     </ul>
   </menu>
-  <h2><%= "Hallo #{current_user().vname}"  %></h2>
 <% end %>
 
 <%= yield %>

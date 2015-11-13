@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
   has_many :plans, through: :attendances
     
   scope :aktuell,->{where(geloescht: false)}
+
 end

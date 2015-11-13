@@ -26,9 +26,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def monatsname(monat)
-    monate = ['Januar', 'Februar', 'Maerz', 'April', 'Mai', 'Juni', 'Juli','August', 'September', 'Oktober', 'November', 'Dezember']
-    return monate[monat - 1]
+  def monate 
+    [ "X", "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober"  , "November", "Dezember" ] 
+  end
+  
+  def wochentage
+    [ "X", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag" ]
   end
 
   def ist_admin
@@ -38,6 +41,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def attendeesload(folge)
+    folge.each_with_object(Hash.new(0)) { |name,anzahl| anzahl[name] += 1}
+  end
+
   # def configuriert
   #   unless Admin.first
   #     redirect_to new_admin_path, notice: "Bitte erstmal die Grundeinstellungen vornehmen."
@@ -45,5 +52,5 @@ class ApplicationController < ActionController::Base
   #   end
   # end
 
-  helper_method :current_user, :monatsname, :ist_admin #, :configuriert
+  helper_method :current_user, :ist_admin, :attendeesload, :monate, :wochentage #, :configuriert
 end

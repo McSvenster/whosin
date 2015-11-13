@@ -11,6 +11,7 @@ class PlansController < ApplicationController
   # GET /plans/1
   # GET /plans/1.json
   def show
+    @folge = @plan.folge.split(",")
   end
 
   # GET /plans/new
@@ -42,23 +43,20 @@ class PlansController < ApplicationController
 
   def calculate
     @plan = Plan.find(params[:id])
-    folge, auslastung = @plan.calculate
-    @plan.folge = folge.join(",")
-    @auslastung = auslastung
+    @folge = @plan.calculate
+    @auslastung = attendeesload(@folge)
     respond_to do |format|
       format.js
     end
   end
 
   def uebernehmen
-    folge, auslastung = Plan.calculate(params[:id])
     @plan = Plan.find(params[:id])
-    @plan.folge = folge
-    @plan.auslastung = auslastung
-    @plan.update
-    respond_to do |format|
-      format.js
-    end
+    @plan.update(folge: params[:folge].join(","), abgenommen: true)
+    redirect_to @plan
+    # respond_to do |format|
+    #   format.js
+    # end
   end
 
   def abschliessen
@@ -73,7 +71,7 @@ class PlansController < ApplicationController
 
     respond_to do |format|
       if @plan.save
-        format.html { redirect_to addattendee_path(id: @plan.id), notice: "Plan was successfully created. Now let's add some attendees." }
+        format.html { redirect_to @plan, notice: "Plan was successfully created. Now let's add some attendees." }
         format.json { render :show, status: :created, location: @plan }
       else
         format.html { render :new }

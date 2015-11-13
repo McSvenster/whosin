@@ -1,8 +1,4 @@
 <div id="plan">
-  <% 
-    monate = [ "X", "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober"  , "November", "Dezember" ] 
-    wochentage = [ "X", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag" ]
-  %>
 
   <% (@plan.start_datum.month..@plan.end_datum.month).each do |monat| %>  
     <article class="monat">
@@ -36,13 +32,13 @@
               <%= (w + (wt - 1)).strftime("%d") %>
             </td>
             <% end %>
-            <% if @plan.folge && !( monat == 12 && w.cweek == 1 ) && @plan.folge[w.cweek] == "nicht besetzt!"%>
+            <% if @folge && !( monat == 12 && w.cweek == 1 ) && @folge[w.cweek] == "nicht besetzt!"%>
             <td class="nicht_besetzt">
             <% else %>
             <td>
             <% end %>
-            <% if @plan.folge && !( monat == 12 && w.cweek == 1 ) %>
-              <%= @plan.folge.split(",")[w.cweek] %>
+            <% if @folge && !( monat == 12 && w.cweek == 1 ) %>
+              <%= @folge[w.cweek] %>
             <% end %>
             </td>
           </tr>
@@ -52,4 +48,15 @@
     </article>
   <% end %>
 </div>
-
+<% if !current_page?(:plans) && @auslastung %>
+<article class="auslastung">
+<%= link_to "OK, so übernehmen", uebernehmen_path(folge: @folge), method: "put" %>
+  <ul>
+  <% @auslastung.each do |name,einsaetze| %>
+    <% unless name == "" %>
+      <li><%= "#{name}.: #{einsaetze}" %></li>
+    <% end %>
+  <% end %>
+  </ul>
+</article>
+<% end %>
