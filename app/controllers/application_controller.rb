@@ -34,13 +34,6 @@ class ApplicationController < ActionController::Base
     [ "X", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag" ]
   end
 
-  def ist_admin
-    unless current_user.admin == true
-      redirect_to "/plans", notice: "Das geht nur als Administrator."
-      return false
-    end
-  end
-
   def attendeesload(folge)
     folge.each_with_object(Hash.new(0)) { |name,anzahl| anzahl[name] += 1}
   end
@@ -52,5 +45,5 @@ class ApplicationController < ActionController::Base
   #   end
   # end
 
-  helper_method :current_user, :ist_admin, :attendeesload, :monate, :wochentage #, :configuriert
+  helper_method :current_user, :attendeesload, :monate, :wochentage #, :configuriert
 end
