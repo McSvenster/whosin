@@ -3,8 +3,7 @@
   &nbsp;<%= user.email %></td>
   <td>
     <%= form_for(user, remote: true) do |u| %>
-      <%= u.text_area :blockdaten, value: user.blockdaten %>
-      <%= u.submit %>
+      <%= u.text_area :blockdaten, value: user.blockdaten, onchange: "$(this).parent('form').submit();" %>
     <% end %>
   </td>
 </tr>
