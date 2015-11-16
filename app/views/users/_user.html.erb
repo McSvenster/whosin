@@ -1,0 +1,10 @@
+<tr>
+  <td><%= link_to "#{user.vname} #{user.nname}", edit_user_path(user) %><br>
+  &nbsp;<%= user.email %></td>
+  <td>
+    <%= form_for(user, remote: true) do |u| %>
+      <%= u.text_area :blockdaten, value: user.blockdaten %>
+      <%= u.submit %>
+    <% end %>
+  </td>
+</tr>

@@ -5,11 +5,7 @@
 <table>
   <tbody>
     <% @users.each do |user| %>
-      <tr>
-        <td><%= link_to "#{user.vname} #{user.nname}", edit_user_path(user) %><br>
-        &nbsp;<%= user.email %></td>
-        <td><%= user.blockdaten %></td>
-      </tr>
+      <%= render 'user', user: user %>
     <% end %>
   </tbody>
 </table>

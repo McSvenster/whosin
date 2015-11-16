@@ -25,7 +25,7 @@
   </div>
   <div class="field">
     <%= f.label :blockdaten %><br>
-    <%= f.text_field :blockdaten %>
+    <%= f.text_area :blockdaten %>
   </div>
   <div class="field">
     <%= f.label :password %><br>
@@ -35,15 +35,25 @@
     <%= f.label :password_confirmation %><br>
     <%= f.password_field :password_confirmation %>
   </div>
-  <div class="field">
-    <%= f.label :admin %><br>
-    <%= f.check_box :admin %>
-  </div>
-  <div class="field">
-    <%= f.label :geloescht %><br>
-    <%= f.check_box :geloescht %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <% if @current_user.admin %>
+    <div class="field">
+      <%= f.label :admin %><br>
+      <%= f.check_box :admin %>
+    </div>
+    <div class="field">
+      <%= f.label :geloescht %><br>
+      <%= f.check_box :geloescht %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+    <p>
+      <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </p>
+  <% else %>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+  
 <% end %>
