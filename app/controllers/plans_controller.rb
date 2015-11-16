@@ -6,7 +6,7 @@ class PlansController < ApplicationController
   def index
     @plans = Plan.all
     @plan = Plan.where(:jahr => Date.today.year).first
-    if @plan.folge 
+    if @plan && @plan.folge 
       @folge = @plan.folge.split(",")
     end
   end
@@ -30,7 +30,7 @@ class PlansController < ApplicationController
   def new
     @plan = Plan.new
     # some defaults - should be changed later on
-    @plan.jahr = Time.now.year + 1
+    Plan.last ? @plan.jahr = Plan.last.jahr + 1 : @plan.jahr = Time.now.year + 1
     @plan.start_datum = "#{@plan.jahr}-01-01"
     @plan.end_datum = "#{@plan.jahr}-12-31"
     @plan.wochentage = "1,2,3,4,5,6"
