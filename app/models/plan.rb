@@ -48,21 +48,22 @@ class Plan < ActiveRecord::Base
         blockwochen += (2..52).step(2).to_a
       when /^\d\d?\.\d\d?\.(\d\d(\d\d)?)?$/
         # 31.10.14 oder 31.10. oder 31.10.2014
+        Rails.logger.warn "date-parser für : #{zeile}\n"
         da = zeile.split(".")
-        da.last.prepend("20") if da.last =~ /\d\d/
+        da.last.prepend("20") if (da.size == 3 && da.last =~ /\d\d/)
         blockwochen << da.reverse!.join("-").to_date.cweek
       when /^\d\d?\.\d\d?\.(\d\d(\d\d)?)?-\d\d?\.\d\d?\.(\d\d(\d\d)?)?$/
         # 5.4.2014-21.4.2014 oder 5.4.14-21.4.14 oder 5.4.-21.4.
         daten = zeile.split("-")
         startd = daten[0].split(".")
         if startd.size == 3
-          startd.last.prepend("20") if startd.last =~ /\d\d/
+          startd.last.prepend("20") if (startd.size == 3 && startd.last =~ /\d\d/)
         else
           startd[2] = jahr
         end
         endd = daten[1].split(".")
         if endd.size == 3
-          endd.last.prepend("20") if endd.last =~ /\d\d/
+          endd.last.prepend("20") if (endd.size == 3 && endd.last =~ /\d\d/)
         else
           endd[2] = jahr
         end

@@ -6,4 +6,15 @@ class User < ActiveRecord::Base
     
   scope :aktuell,->{where(geloescht: false)}
 
+  # def blockdatenreset
+  #   User.each do |u|
+  #     if u.kader
+  #       u.blockdaten = ""
+  #     else
+  #       u.blockdaten = "24.12. - 31.12."
+  #     end
+  #     u.save
+  #   end
+  # end
+
 end

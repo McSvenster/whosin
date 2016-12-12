@@ -67,6 +67,7 @@ class PlansController < ApplicationController
 
   def close
     @plan.update(abgenommen: true)
+    # attendees dates leeren und mit Weihnachtsdefaults füllen
     redirect_to @plan
   end
 
