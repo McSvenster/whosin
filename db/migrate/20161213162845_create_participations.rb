@@ -1,9 +1,8 @@
 class CreateParticipations < ActiveRecord::Migration
   def change
     create_table :participations do |t|
-      t.integer :mid
-      t.integer :pid
-      t.integer :uid
+      t.integer :milestone_id
+      t.integer :user_id
       t.date :startdate
       t.date :enddate
       t.integer :attention
