@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :participations
+
+  resources :projekts
+
+  resources :milestones
+
   resources :attendances
 
   resources :plans

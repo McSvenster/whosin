@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pid:</strong>
+  <%= @milestone.pid %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @milestone.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @milestone.description %>
+</p>
+
+<p>
+  <strong>Startdate:</strong>
+  <%= @milestone.startdate %>
+</p>
+
+<p>
+  <strong>Enddate:</strong>
+  <%= @milestone.enddate %>
+</p>
+
+<%= link_to 'Edit', edit_milestone_path(@milestone) %> |
+<%= link_to 'Back', milestones_path %>
