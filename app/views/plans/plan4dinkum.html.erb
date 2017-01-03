@@ -1,0 +1,23 @@
+h1. <%= @plan.jahr %>
+<% (@plan.start_datum.month..@plan.end_datum.month).each do |monat| %>  
+  <br>
+  <br>
+    || <%= monate[monat] %> ||<br>
+    || <%= (@plan.wechsel == 1)? "KW" : "R" %> ||
+    <% c = 0 %>
+    <% 7.times do %>
+      <%= (@plan.wechsel + c) <= 7? wochentage[@plan.wechsel + c].slice(0..1) : wochentage[@plan.wechsel + c - 7].slice(0..1) %> ||
+      <% c = c+1 %>
+    <% end %>
+    
+  
+  <% w = Date.new(@plan.jahr,monat).monday %>
+  <% while (w.month <= monat && w.year <= @plan.jahr) || (w.month == 12 && w.year < @plan.jahr) do %>
+      <br>| <%= w.cweek %> | 
+      <% (1..7).each do |wt| %>
+        <%= (w + (wt - 1)).strftime("%d") %> |
+      <% end %>
+      <%= @folge[w.cweek] if @folge && !( monat == 12 && w.cweek == 1 ) %> |
+    <% w = w+7 %>
+  <% end %>
+<% end %>

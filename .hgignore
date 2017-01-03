@@ -1,0 +1,14 @@
+syntax: glob
+.bundle
+*.htaccess
+*.log
+*.sass-cache
+*.swp
+*.DS_Store
+config/database.yml
+config/secrets.yml
+tmp/
+vendor/bundle/
+
+syntax: regexp
+db\/(?!migrate).*

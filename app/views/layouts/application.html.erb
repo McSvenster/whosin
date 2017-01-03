@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Whosin</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<% unless current_page?(new_session_url) %>
+  <menu class="main_menu">
+    <ul>
+      <% if @plans %>
+        <% @plans.each do |plan| %>
+          <li><%= link_to "#{plan.jahr}", plan %></li>
+        <% end %>
+      <% end %>
+    </ul>
+    <ul>
+      <li><%= link_to "users", users_path %></li>
+      <li><%= link_to "new plan", new_plan_path %></li>
+    </ul>
+  </menu>
+<% end %>
+
+<%= yield %>
+
+</body>
+</html>

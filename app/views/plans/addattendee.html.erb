@@ -1,0 +1,11 @@
+<%= form_for @plan do |f| %>
+  <% User.aktuell.order('nname').each do |user| %>
+    <% flag = @plan.attendances.any? { |attendance| attendance.user_id == user.id } %>
+    <%= user.vname + " " + user.nname.first + ". " %>
+    <%= check_box_tag "plan[attendances_attributes][][user_id]", user.id, flag %><br>
+  <% end %>
+
+
+
+  <%= f.submit %>
+<% end %>

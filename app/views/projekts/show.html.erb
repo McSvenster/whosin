@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @projekt.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @projekt.description %>
+</p>
+
+<p>
+  <strong>Jpissue:</strong>
+  <%= @projekt.jpissue %>
+</p>
+
+<p>
+  <strong>Startdate:</strong>
+  <%= @projekt.startdate %>
+</p>
+
+<p>
+  <strong>Enddate:</strong>
+  <%= @projekt.enddate %>
+</p>
+
+<%= link_to 'Edit', edit_projekt_path(@projekt) %> |
+<%= link_to 'Back', projekts_path %>

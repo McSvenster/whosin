@@ -1,0 +1,62 @@
+<br>
+<% if @plan %>
+  <h2>Plan für <%= @plan.jahr %></h2>
+  <article>
+    <strong>Teilnehmer(<%= @plan.attendances.size %>):</strong>
+    <% @plan.attendances.each do |a| %>
+      <%= "#{a.user.vname} #{a.user.nname.first}." %>
+    <% end %>
+  </article>
+<hr>
+<br>
+  <% (@plan.start_datum.month..@plan.end_datum.month).each do |monat| %>  
+    <article class="monat">
+      <table>
+        <tr>
+          <th colspan="9" style="text-align: left; font-weight:bold; "><%= monate[monat] %></th>
+        </tr>
+        <tr class="kopf">
+          <td class="wn"><%= (@plan.wechsel == 1)? "KW" : "R" %></td>
+          <% c = 0 %>
+          <% 7.times do %>
+            <td><%= (@plan.wechsel + c) <= 7? wochentage[@plan.wechsel + c].slice(0..1) : wochentage[@plan.wechsel + c - 7].slice(0..1) %></td>
+            <% c = c+1 %>
+          <% end %>
+          <td></td>
+        </tr>
+        <% w = Date.new(@plan.jahr,monat).monday %>
+        <% while (w.month <= monat && w.year <= @plan.jahr) || (w.month == 12 && w.year < @plan.jahr) do %>
+          <% if w.cweek == Date.today.cweek && w.year == Date.today.year %>
+            <tr class="aktuell">
+          <% else %>
+            <tr>
+          <% end %>
+            <td class="wn"><%= w.cweek %></td>
+            <% (1..7).each do |wt| %>
+              <% if (w + (wt - 1)) == Date.today %>
+                <td class="heute">
+              <% else %>
+                <td class="dom">
+              <% end %>
+              <%= (w + (wt - 1)).strftime("%d") %>
+            </td>
+            <% end %>
+            <% if @folge && !( monat == 12 && w.cweek == 1 ) && @folge[w.cweek] == "nicht besetzt!"%>
+            <td class="nicht_besetzt">
+            <% else %>
+            <td>
+            <% end %>
+            <% if @folge && !( monat == 12 && w.cweek == 1 ) %>
+              <%= @folge[w.cweek] %>
+            <% end %>
+            </td>
+          </tr>
+          <% w = w+7 %>
+        <% end %>
+      </table>
+    </article>
+  <% end %>
+</div>
+<% else %>
+  <h2>Es ist kein Plan für das laufende Jahr im System erfasst.</h2>
+<% end %>

@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Mögliche Teilnehmer</h1>
+
+<table>
+  <tbody>
+    <% @users.each do |user| %>
+      <%= render 'user', user: user %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User', new_user_path %>
