@@ -1,3 +1,4 @@
+<% @milestone.projekt_id = @projekt.id %>
 <%= form_for(@milestone) do |f| %>
   <% if @milestone.errors.any? %>
     <div id="error_explanation">
@@ -10,11 +11,8 @@
       </ul>
     </div>
   <% end %>
+  <%= f.hidden_field :projekt_id %>
 
-  <div class="field">
-    <%= f.label :projekt_id %><br>
-    <%= f.number_field :projekt_id %>
-  </div>
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
@@ -25,11 +23,11 @@
   </div>
   <div class="field">
     <%= f.label :startdate %><br>
-    <%= f.date_select :startdate %>
+    <%= f.date_field :startdate %>
   </div>
   <div class="field">
     <%= f.label :enddate %><br>
-    <%= f.date_select :enddate %>
+    <%= f.date_field :enddate %>
   </div>
   <div class="actions">
     <%= f.submit %>
