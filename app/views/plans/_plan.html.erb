@@ -18,7 +18,7 @@
       <% end %>
     </menu>
   </article> 
-<ul class="attendees">
+  <ul class="attendees">
     <% User.aktuell.order('nname').each do |user| %>
       <% uname =  user.vname + " " + user.nname.first + "." %>
       <% if @plan.attendances.any? { |attendance| attendance.user_id == user.id } %>
@@ -31,7 +31,7 @@
       <li>
         <table class="attendee">
           <tr>
-            <td class="name"><%= uname %></td>
+            <td class="name"><%= link_to uname, edit_user_url(user) %></td>
             <td class="checkbox"><%= link_to link, addattendee_path(id: @plan.id, user_id: user.id, todo: cl), class: cl %></td>
           </tr>
         </table>
