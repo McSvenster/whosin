@@ -29,7 +29,8 @@ class MilestonesController < ApplicationController
     respond_to do |format|
       if @milestone.save
         format.html { 
-          if @projekt
+          if @milestone.projekt_id
+            @projekt = Projekt.find(@milestone.projekt_id)
             redirect_to @projekt, notice: 'Milestone for Projekt was successfully created.'
           else
             redirect_to @milestone, notice: 'Milestone was successfully created.' 
