@@ -4,7 +4,6 @@ class PlansController < ApplicationController
   # GET /plans
   # GET /plans.json
   def index
-    @plans = Plan.all
     @plan = Plan.where(:jahr => Date.today.year).first
     if @plan && @plan.folge 
       @folge = @plan.folge.split(",")
@@ -66,7 +65,8 @@ class PlansController < ApplicationController
   end
 
   def close
-    @plan.update(abgenommen: true)
+    # @plan.update(abgenommen: true)
+    @plan.close
     # attendees dates leeren und mit Weihnachtsdefaults füllen
     redirect_to @plan
   end

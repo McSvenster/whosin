@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
     resource = controller_name.singularize.to_sym
     method = "#{resource}_params"
     params[resource] &&= send(method) if respond_to?(method, true)
+    @plans = Plan.all.order(:jahr)
   end
 
   private

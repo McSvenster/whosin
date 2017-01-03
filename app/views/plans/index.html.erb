@@ -1,9 +1,3 @@
-<aside class="fr">
-  <% @plans.each do |plan| %>
-    <%= link_to "#{plan.jahr}", plan %><br>
-  <% end %>
-</aside>
-
 <br>
 <% if @plan %>
   <h2>Plan für <%= @plan.jahr %></h2>

@@ -20,6 +20,15 @@ class Plan < ActiveRecord::Base
     return folge
   end
 
+  def close
+    self.abgenommen = true
+    self.save
+    self.users.each do |u|
+      u.blockdaten = ""
+      u.save
+    end
+  end
+
   private
 #####
 ## Uebersetzung der eingegebenen Blockdaten in KWs
