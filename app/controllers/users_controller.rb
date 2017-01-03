@@ -4,7 +4,13 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all.order('nname')
+    if params[:plan]
+      p = Plan.find(params[:plan])
+      @users = p.users
+      @jahr = p.jahr
+    else
+      @users = User.all.order('nname')
+    end
   end
 
   # GET /users/1
