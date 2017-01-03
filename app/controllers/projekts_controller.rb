@@ -10,6 +10,7 @@ class ProjektsController < ApplicationController
   # GET /projekts/1
   # GET /projekts/1.json
   def show
+    @milestone = Milestone.new
   end
 
   # GET /projekts/new

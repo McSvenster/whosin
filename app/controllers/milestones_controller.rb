@@ -28,7 +28,13 @@ class MilestonesController < ApplicationController
 
     respond_to do |format|
       if @milestone.save
-        format.html { redirect_to @milestone, notice: 'Milestone was successfully created.' }
+        format.html { 
+          if @projekt
+            redirect_to @projekt, notice: 'Milestone for Projekt was successfully created.'
+          else
+            redirect_to @milestone, notice: 'Milestone was successfully created.' 
+          end
+        }
         format.json { render :show, status: :created, location: @milestone }
       else
         format.html { render :new }
@@ -69,6 +75,6 @@ class MilestonesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def milestone_params
-      params.require(:milestone).permit(:pid, :title, :description, :startdate, :enddate)
+      params.require(:milestone).permit(:projekt_id, :title, :description, :startdate, :enddate)
     end
 end
