@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :participations
 
-  resources :projekts
+  resources :projects
 
   resources :milestones
 

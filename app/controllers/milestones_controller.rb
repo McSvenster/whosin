@@ -29,9 +29,9 @@ class MilestonesController < ApplicationController
     respond_to do |format|
       if @milestone.save
         format.html { 
-          if @milestone.projekt_id
-            @projekt = Projekt.find(@milestone.projekt_id)
-            redirect_to @projekt, notice: 'Milestone for Projekt was successfully created.'
+          if @milestone.project_id
+            @project = Project.find(@milestone.project_id)
+            redirect_to @project, notice: 'Milestone for Project was successfully created.'
           else
             redirect_to @milestone, notice: 'Milestone was successfully created.' 
           end
@@ -76,6 +76,6 @@ class MilestonesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def milestone_params
-      params.require(:milestone).permit(:projekt_id, :title, :description, :startdate, :enddate)
+      params.require(:milestone).permit(:project_id, :title, :description, :startdate, :enddate)
     end
 end

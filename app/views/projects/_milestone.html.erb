@@ -1,4 +1,4 @@
-<% @milestone.projekt_id = @projekt.id %>
+<% @milestone.project_id = @project.id %>
 <%= form_for(@milestone) do |f| %>
   <% if @milestone.errors.any? %>
     <div id="error_explanation">
@@ -11,7 +11,7 @@
       </ul>
     </div>
   <% end %>
-  <%= f.hidden_field :projekt_id %>
+  <%= f.hidden_field :project_id %>
 
   <div class="field">
     <%= f.label :title %><br>

@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<h2><%= link_to @project.title, edit_project_path(@project) %></h2>
+<%= @project.jpissue %>, <%= @project.startdate %> - <%= @project.enddate %>
+<p>
+  <%= @project.description %>
+</p>
+
+<strong>Meilensteine:</strong>
+<ul>
+<% @project.milestones.each do |m| %>
+  <li><%= m.title %></li>
+<% end %>
+</ul>
+<p>neuen Meilenstein anlegen</p>
+<%= render 'milestone' %>
