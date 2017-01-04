@@ -24,8 +24,7 @@ class Plan < ActiveRecord::Base
     self.abgenommen = true
     self.save
     self.users.each do |u|
-      u.blockdaten = ""
-      u.save
+      u.blockdatenreset
     end
   end
 
