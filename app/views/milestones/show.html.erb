@@ -10,14 +10,18 @@
   <%= @milestone.description %>
 </p>
 
-<p>
-  <ul class="participants">
-    <li>Teilnehmer:</li>
-    <% @milestone.users.each do |user| %>
-      <li><%= user.vname + " " + user.nname.first + "." %></li>
-    <% end %>
-  </ul>
-</p>
+<table>
+  <tr>
+    <th colspan="2">Teilnehmer:</th>
+  </tr>
+<% @milestone.users.each do |user| %>
+  <tr>
+    <td><%= user.vname + " " + user.nname.first + "." %></td>
+    <td><%= user.mpeak(@milestone.id) %></td>
+  </tr>
+<% end %>
+</table>
+
 <aside class="fr">
   <table class="attendee">
     <% User.aktuell.order('nname').each do |user| %>
