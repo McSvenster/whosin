@@ -2,8 +2,9 @@ Rails.application.routes.draw do
   resources :participations
 
   resources :projects
-
+  
   resources :milestones
+  get 'milestones/:id/adparticipant' => 'milestones#adparticipant', as: :adparticipant
 
   resources :attendances
 

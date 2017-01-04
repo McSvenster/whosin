@@ -9,7 +9,7 @@
 <strong>Meilensteine:</strong>
 <ul>
 <% @project.milestones.each do |m| %>
-  <li><%= m.title %></li>
+  <li><%= link_to m.title, m %></li>
 <% end %>
 </ul>
 <p>neuen Meilenstein anlegen</p>

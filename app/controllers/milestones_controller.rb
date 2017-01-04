@@ -21,6 +21,16 @@ class MilestonesController < ApplicationController
   def edit
   end
 
+
+  def adparticipant
+    @milestone = Milestone.find(params[:id])
+    if params[:todo] == "tn"
+      @milestone.participations.where(user_id: params[:user_id]).first.destroy
+    else
+      @milestone.participations.create(user_id: params[:user_id])
+    end
+    redirect_to @milestone
+  end
   # POST /milestones
   # POST /milestones.json
   def create

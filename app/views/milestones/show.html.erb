@@ -1,29 +1,39 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Pid:</strong>
-  <%= @milestone.project_id %>
-</p>
+<h2><%= @milestone.title %></h2>
+<%= @milestone.startdate %> - <%= @milestone.enddate %>
+<h3><%= @milestone.project.title %></h3>
+
+
 
 <p>
-  <strong>Title:</strong>
-  <%= @milestone.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
   <%= @milestone.description %>
 </p>
 
 <p>
-  <strong>Startdate:</strong>
-  <%= @milestone.startdate %>
+  <ul class="participants">
+    <li>Teilnehmer:</li>
+    <% @milestone.users.each do |user| %>
+      <li><%= user.vname + " " + user.nname.first + "." %></li>
+    <% end %>
+  </ul>
 </p>
-
-<p>
-  <strong>Enddate:</strong>
-  <%= @milestone.enddate %>
-</p>
-
-<%= link_to 'Edit', edit_milestone_path(@milestone) %> |
-<%= link_to 'Back', milestones_path %>
+<aside class="fr">
+  <table class="attendee">
+    <% User.aktuell.order('nname').each do |user| %>
+      <% uname =  user.vname + " " + user.nname.first + "." %>
+      <% if @milestone.participations.any? { |participation| participation.user_id == user.id } %>
+        <% cl = "tn" %>
+        <% link = "( X )" %>
+      <% else %>
+        <% cl = "ntn" %>
+        <% link = "" %>
+      <% end %>
+      <tr>
+        <td class="name"><%= link_to uname, edit_user_url(user) %></td>
+        <td class="checkbox"><%= link_to link, adparticipant_path(id: @milestone.id, user_id: user.id, todo: cl), class: cl %></td>
+      </tr>
+    <% end %>
+  </table>
+</aside>
+<%= link_to 'Edit', edit_milestone_path(@milestone) %>
