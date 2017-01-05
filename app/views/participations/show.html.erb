@@ -2,17 +2,12 @@
 
 <p>
   <strong>Mid:</strong>
-  <%= @participation.mid %>
-</p>
-
-<p>
-  <strong>Pid:</strong>
-  <%= @participation.pid %>
+  <%= @participation.milestone_id %>
 </p>
 
 <p>
   <strong>Uid:</strong>
-  <%= @participation.uid %>
+  <%= @participation.user_id %>
 </p>
 
 <p>
@@ -28,6 +23,11 @@
 <p>
   <strong>Attention:</strong>
   <%= @participation.attention %>
+</p>
+
+<p>
+  <strong>Peak:</strong>
+  <%= @participation.peak.peakformula %>
 </p>
 
 <%= link_to 'Edit', edit_participation_path(@participation) %> |
