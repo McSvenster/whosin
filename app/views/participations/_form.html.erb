@@ -11,29 +11,24 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :mid %><br>
-    <%= f.number_field :mid %>
+<h2><%= @participation.milestone.project.title + " : " + @participation.milestone.title + " : " + @participation.user.vname %></h2>
   </div>
-  <div class="field">
-    <%= f.label :pid %><br>
-    <%= f.number_field :pid %>
-  </div>
-  <div class="field">
-    <%= f.label :uid %><br>
-    <%= f.number_field :uid %>
-  </div>
+
   <div class="field">
     <%= f.label :startdate %><br>
-    <%= f.date_select :startdate %>
+    <%= f.date_field :startdate %>
   </div>
   <div class="field">
     <%= f.label :enddate %><br>
-    <%= f.date_select :enddate %>
+    <%= f.date_field :enddate %>
   </div>
   <div class="field">
     <%= f.label :attention %><br>
     <%= f.number_field :attention %>
+  </div>
+  <div class="field">
+    <%= f.label :peak_id %><br>
+    <%= f.number_field :peak_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

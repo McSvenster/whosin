@@ -1,0 +1,1 @@
+json.array! @peaks, partial: 'peaks/peak', as: :peak

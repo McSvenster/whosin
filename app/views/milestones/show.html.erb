@@ -16,7 +16,7 @@
   </tr>
 <% @milestone.users.each do |user| %>
   <tr>
-    <td><%= user.vname + " " + user.nname.first + "." %></td>
+    <td><%= link_to user.vname + " " + user.nname.first + ".", edit_participation_path(@milestone.participations.where(user_id: user.id).first) %></td>
     <td><%= user.mpeak(@milestone.id) %></td>
   </tr>
 <% end %>
