@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   end
 
   def mpeak(mid)
-    self.participations.where(milestone_id: mid).first.peak
+    self.participations.where(milestone_id: mid).first.peak_id
   end
 
 end
