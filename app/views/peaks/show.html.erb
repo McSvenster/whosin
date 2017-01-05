@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Peaksign:</strong>
+  <%= @peak.peaksign %>
+</p>
+
+<p>
+  <strong>Peakformula:</strong>
+  <%= @peak.peakformula %>
+</p>
+
+<p>
+  <strong>Peakimage:</strong>
+  <%= @peak.peakimage %>
+</p>
+
+<p>
+  <strong>Participation:</strong>
+  <%= @peak.participation_id %>
+</p>
+
+<%= link_to 'Edit', edit_peak_path(@peak) %> |
+<%= link_to 'Back', peaks_path %>
