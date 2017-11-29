@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   before_action :set_session, only: [:show, :edit, :update, :destroy]
 
-  skip_before_filter :current_user #, :configuriert
+  skip_before_action :current_user #, :configuriert
 
   def create
     user = User.where(email: params[:email]).first
