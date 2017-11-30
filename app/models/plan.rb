@@ -14,7 +14,7 @@ class Plan < ActiveRecord::Base
       name = u.vname + " " + u.nname.first + "."
       u.blockdaten ? blockwochen = blockwochen_finden(u.blockdaten,self.jahr) : blockwochen = []
       tn[name] = blockwochen
-      Rails.logger.info "KWs für #{name}: #{blockwochen}"
+      Rails.logger.info "Blocked weeks for #{name}: #{blockwochen}"
     end
     
     folge = folge_berechnen(tn,self.jahr)
@@ -49,7 +49,7 @@ class Plan < ActiveRecord::Base
         blockwochen += (2..52).step(2).to_a
       when /^\d\d?\.\d\d?\.(\d\d(\d\d)?)?$/
         # 31.10.14 oder 31.10. oder 31.10.2014
-        Rails.logger.warn "date-parser für : #{zeile}\n"
+        # Rails.logger.warn "date-parser für : #{zeile}\n"
         da = zeile.split(".")
         da.last.prepend("20") if (da.size == 3 && da.last =~ /\d\d/)
         blockwochen << da.reverse!.join("-").to_date.cweek
@@ -70,6 +70,8 @@ class Plan < ActiveRecord::Base
         end
         startw = startd.reverse!.join("-").to_date.cweek
         endw = endd.reverse!.join("-").to_date.cweek
+        endw < startw ? endw += 52 : endw = endw
+        Rails.logger.info "#{zeile} calculated as week #{startw} to week #{endw}"
         blockwochen += (startw..endw).to_a
       end
     end

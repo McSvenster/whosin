@@ -7,4 +7,6 @@ user = {
   geloescht: false
 }
 
-User.create(user)
+if User.create(user)
+  puts "initial user (#{user.email}) created"
+end
