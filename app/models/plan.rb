@@ -14,6 +14,7 @@ class Plan < ActiveRecord::Base
       name = u.vname + " " + u.nname.first + "."
       u.blockdaten ? blockwochen = blockwochen_finden(u.blockdaten,self.jahr) : blockwochen = []
       tn[name] = blockwochen
+      Rails.logger.info "KWs für #{name}: #{blockwochen}"
     end
     
     folge = folge_berechnen(tn,self.jahr)
