@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :attendances
   has_many :plans, through: :attendances
     
-  scope :aktuell,->{where(geloescht: false)}
+  scope :aktuell,->{where(geloescht: 0)}
 
   # def blockdatenreset
   #   User.each do |u|
